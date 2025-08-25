@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="#000"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/visor_tv"
+        android:textSize="70sp"
+        android:gravity="end"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="100sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/oito"/>
+
+    <Button
+        android:id="@+id/sete"
+        android:layout_width="90sp"
+        android:layout_height="100sp"
+        android:textSize="40sp"
+        android:backgroundTint="@color/cinza_escuro"
+        android:text="7"
+        app:layout_constraintTop_toBottomOf="@id/visor_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/quatro"
+        app:layout_constraintEnd_toStartOf="@id/oito"/>
+
+    <Button
+        android:id="@+id/oito"
+        android:layout_width="90sp"
+        android:layout_height="100sp"
+        android:textSize="40sp"
+        android:backgroundTint="@color/cinza_escuro"
+        android:text="8"
+        app:layout_constraintTop_toBottomOf="@id/visor_tv"
+        app:layout_constraintStart_toEndOf="@id/sete"
+        app:layout_constraintEnd_toStartOf="@id/nove"
+        app:layout_constraintBottom_toTopOf="@id/cinco"/>
+
+    <Button
+        android:id="@+id/nove"
+        android:layout_width="90sp"
+        android:layout_height="100sp"
+        android:textSize="40sp"
+        android:backgroundTint="@color/cinza_escuro"
+        android:text="9"
+        app:layout_constraintTop_toBottomOf="@id/visor_tv"
+        app:layout_constraintEnd_toStartOf="@id/divisao"
+        app:layout_constraintStart_toEndOf="@id/oito"
+        app:layout_constraintBottom_toTopOf="@id/seis"/>
+
+    <Button
+        android:id="@+id/divisao"
+        android:layout_width="90sp"
+        android:layout_height="100sp"
+        android:textSize="40sp"
+        android:backgroundTint="@color/roxo"
+        android:text="/"
+        app:layout_constraintTop_toBottomOf="@id/visor_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/multiplicacao"
+        app:layout_constraintStart_toEndOf="@id/nove"/>
+
+    <Button
+        android:id="@+id/quatro"
+        android:layout_width="90sp"
+        android:layout_height="100sp"
+        android:textSize="40sp"
+        android:backgroundTint="@color/cinza_escuro"
+        android:text="4"
+        app:layout_constraintTop_toBottomOf="@id/sete"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/um"
+        app:layout_constraintEnd_toStartOf="@id/cinco"/>
+
+    <Button
+        android:id="@+id/cinco"
+        android:layout_width="90sp"
+        android:layout_height="100sp"
+        android:textSize="40sp"
+        android:backgroundTint="@color/cinza_escuro"
+        android:text="5"
+        app:layout_constraintTop_toBottomOf="@id/oito"
+        app:layout_constraintStart_toEndOf="@id/quatro"
+        app:layout_constraintEnd_toStartOf="@id/seis"
+        app:layout_constraintBottom_toTopOf="@id/dois"/>
+
+    <Button
+        android:id="@+id/seis"
+        android:layout_width="90sp"
+        android:layout_height="100sp"
+        android:textSize="40sp"
+        android:backgroundTint="@color/cinza_escuro"
+        android:text="6"
+        app:layout_constraintTop_toBottomOf="@id/nove"
+        app:layout_constraintEnd_toStartOf="@id/multiplicacao"
+        app:layout_constraintBottom_toTopOf="@id/tres"
+        app:layout_constraintStart_toEndOf="@id/cinco"/>
+
+    <Button
+        android:id="@+id/multiplicacao"
+        android:layout_width="90sp"
+        android:layout_height="100sp"
+        android:textSize="40sp"
+        android:backgroundTint="@color/roxo"
+        android:text="X"
+        app:layout_constraintTop_toBottomOf="@id/divisao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tres"
+        app:layout_constraintStart_toEndOf="@id/seis"/>
+
+    <Button
+        android:id="@+id/um"
+        android:layout_width="90sp"
+        android:layout_height="100sp"
+        android:textSize="40sp"
+        android:backgroundTint="@color/cinza_escuro"
+        android:text="1"
+        app:layout_constraintTop_toBottomOf="@id/quatro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/clear"
+        app:layout_constraintEnd_toStartOf="@id/dois"/>
+
+    <Button
+        android:id="@+id/dois"
+        android:layout_width="90sp"
+        android:layout_height="100sp"
+        android:textSize="40sp"
+        android:backgroundTint="@color/cinza_escuro"
+        android:text="2"
+        app:layout_constraintTop_toBottomOf="@id/cinco"
+        app:layout_constraintStart_toEndOf="@id/um"
+        app:layout_constraintEnd_toStartOf="@id/tres"
+        app:layout_constraintBottom_toTopOf="@id/zero"/>
+
+    <Button
+        android:id="@+id/tres"
+        android:layout_width="90sp"
+        android:layout_height="100sp"
+        android:textSize="40sp"
+        android:backgroundTint="@color/cinza_escuro"
+        android:text="3"
+        app:layout_constraintTop_toBottomOf="@id/seis"
+        app:layout_constraintEnd_toStartOf="@id/subtracao"
+        app:layout_constraintBottom_toTopOf="@id/igual"
+        app:layout_constraintStart_toEndOf="@id/dois"/>
+
+    <Button
+        android:id="@+id/subtracao"
+        android:layout_width="90sp"
+        android:layout_height="100sp"
+        android:textSize="40sp"
+        android:backgroundTint="@color/roxo"
+        android:text="-"
+        app:layout_constraintStart_toEndOf="@id/tres"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/adicao"
+        app:layout_constraintTop_toBottomOf="@id/multiplicacao"/>
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="90sp"
+        android:layout_height="100sp"
+        android:textSize="40sp"
+        android:backgroundTint="@color/cinza_claro"
+        android:textColor="@color/black"
+        android:text="C"
+        app:layout_constraintTop_toBottomOf="@id/um"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/zero"/>
+
+    <Button
+        android:id="@+id/zero"
+        android:layout_width="90sp"
+        android:layout_height="100sp"
+        android:textSize="40sp"
+        android:backgroundTint="@color/cinza_escuro"
+        android:text="0"
+        app:layout_constraintTop_toBottomOf="@id/dois"
+        app:layout_constraintStart_toEndOf="@id/clear"
+        app:layout_constraintEnd_toStartOf="@id/igual"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <Button
+        android:id="@+id/igual"
+        android:layout_width="90sp"
+        android:layout_height="100sp"
+        android:textSize="40sp"
+        android:backgroundTint="@color/cinza_claro"
+        android:textColor="@color/black"
+        android:text="="
+        app:layout_constraintTop_toBottomOf="@id/tres"
+        app:layout_constraintEnd_toStartOf="@id/adicao"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/zero"/>
+
+    <Button
+        android:id="@+id/adicao"
+        android:layout_width="90sp"
+        android:layout_height="100sp"
+        android:textSize="40sp"
+        android:backgroundTint="@color/roxo"
+        android:text="+"
+        app:layout_constraintTop_toBottomOf="@id/subtracao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/igual"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
