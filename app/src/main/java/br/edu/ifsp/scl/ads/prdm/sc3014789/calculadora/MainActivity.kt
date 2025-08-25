@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
     private var numeroAtual = ""
-    private var primeiroNumero: Int? = null
+    private var primeiroNumero: Double? = null
     private var operacao: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,8 +28,9 @@ class MainActivity : AppCompatActivity() {
             igualBt.setOnClickListener {
                 val resultado = getResultadoOperacao()
                 if (nonNull(resultado)) {
-                    visorTv.text = resultado.toString()
-                    numeroAtual = resultado.toString()
+                    val resultadoFormatted = getFormattedNumber(resultado)
+                    visorTv.text = resultadoFormatted
+                    numeroAtual = resultadoFormatted
                     operacao = null
                 } else clear()
             }
@@ -38,11 +39,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getResultadoOperacao(): Int? {
-        val segundoNumero: Int = numeroAtual.toInt()
+    private fun getResultadoOperacao(): Double? {
+        val segundoNumero: Double = numeroAtual.toDouble()
         return when(operacao) {
             "/" -> {
-                if (segundoNumero != 0)
+                if (segundoNumero != 0.0)
                     return primeiroNumero?.div(segundoNumero)
                 else {
                     Toast.makeText(this@MainActivity, "Divisão por 0 é inválida!", Toast.LENGTH_SHORT).show()
@@ -70,14 +71,13 @@ class MainActivity : AppCompatActivity() {
                 if (isNull(operacao)) {
                     visorTv.text = numeroAtual
                 } else {
-                    val operacaoCompleta = primeiroNumero.toString() + operacao + numeroAtual
+                    val operacaoCompleta = getFormattedNumber(primeiroNumero) + operacao + numeroAtual
                     visorTv.text = operacaoCompleta
                 }
             }
         }
     }
 
-    // TODO - tratar casos onde já tem uma operação selecionada
     private fun ActivityMainBinding.initBotoesOperacoes() {
         val botoesOperacoes = listOf(
             divisaoBt, multiplicacaoBt, subtracaoBt, adicaoBt
@@ -86,17 +86,17 @@ class MainActivity : AppCompatActivity() {
         botoesOperacoes.forEach { botao ->
             botao.setOnClickListener {
                 if (isNull(operacao)) {
-                    primeiroNumero = numeroAtual.toInt()
+                    primeiroNumero = numeroAtual.toDouble()
                     operacao = botao.text.toString()
-                    numeroAtual = ""
-                    val operacaoParcial = primeiroNumero.toString() + operacao
+                    val operacaoParcial = numeroAtual + operacao
                     visorTv.text = operacaoParcial
+                    numeroAtual = ""
                 } else {
                     primeiroNumero = getResultadoOperacao()
                     operacao = botao.text.toString()
-                    numeroAtual = ""
-                    val operacaoParcial = primeiroNumero.toString() + operacao
+                    val operacaoParcial = getFormattedNumber(primeiroNumero) + operacao
                     visorTv.text = operacaoParcial
+                    numeroAtual = ""
                 }
             }
         }
@@ -108,4 +108,16 @@ class MainActivity : AppCompatActivity() {
         primeiroNumero = null
         operacao = null
     }
+
+    fun isInteger(num: Double?): Boolean {
+        return num == num?.toInt()?.toDouble()
+    }
+
+    fun getFormattedNumber(num: Double?): String {
+        if (isInteger(num))
+            return num?.toInt().toString()
+        else
+            return num.toString()
+    }
+
 }
