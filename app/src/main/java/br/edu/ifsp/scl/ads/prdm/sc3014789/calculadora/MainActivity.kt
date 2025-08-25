@@ -1,8 +1,11 @@
 package br.edu.ifsp.scl.ads.prdm.sc3014789.calculadora
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.prdm.sc3014789.calculadora.databinding.ActivityMainBinding
+import java.util.Objects.isNull
+import java.util.Objects.nonNull
 
 class MainActivity : AppCompatActivity() {
     private val amb: ActivityMainBinding by lazy {
@@ -20,27 +23,39 @@ class MainActivity : AppCompatActivity() {
 
             initBotoesNumeros()
             initBotoesOperacoes()
-            initClearButton()
+            clearBt.setOnClickListener { clear() }
 
             igualBt.setOnClickListener {
                 val resultado = getResultadoOperacao()
-                visorTv.text = resultado.toString()
-                numeroAtual = resultado.toString()
-                operacao = null
+                if (nonNull(resultado)) {
+                    visorTv.text = resultado.toString()
+                    numeroAtual = resultado.toString()
+                    operacao = null
+                } else clear()
             }
 
         }
 
     }
 
-    private fun ActivityMainBinding.getResultadoOperacao(): Int? {
+    private fun getResultadoOperacao(): Int? {
         val segundoNumero: Int = numeroAtual.toInt()
         return when(operacao) {
-            "/" -> primeiroNumero?.div(segundoNumero)
+            "/" -> {
+                if (segundoNumero != 0)
+                    return primeiroNumero?.div(segundoNumero)
+                else {
+                    Toast.makeText(this@MainActivity, "Divisão por 0 é inválida!", Toast.LENGTH_SHORT).show()
+                    return null
+                }
+            }
             "X" -> primeiroNumero?.times(segundoNumero)
             "-" -> primeiroNumero?.minus(segundoNumero)
             "+" -> primeiroNumero?.plus(segundoNumero)
-            else -> {null}
+            else -> {
+                Toast.makeText(this@MainActivity, "Algo de errado aconteceu!", Toast.LENGTH_SHORT).show()
+                return null
+            }
         }
     }
 
@@ -51,11 +66,10 @@ class MainActivity : AppCompatActivity() {
 
         botoesNumeros.forEach { botao ->
             botao.setOnClickListener {
-                if (operacao == null) {
-                    numeroAtual += botao.text
+                numeroAtual += botao.text
+                if (isNull(operacao)) {
                     visorTv.text = numeroAtual
                 } else {
-                    numeroAtual += botao.text
                     val operacaoCompleta = primeiroNumero.toString() + operacao + numeroAtual
                     visorTv.text = operacaoCompleta
                 }
@@ -71,22 +85,27 @@ class MainActivity : AppCompatActivity() {
 
         botoesOperacoes.forEach { botao ->
             botao.setOnClickListener {
-                primeiroNumero = numeroAtual.toInt()
-                numeroAtual = ""
-                operacao = botao.text.toString()
-
-                val operacaoParcial = primeiroNumero.toString() + operacao
-                visorTv.text = operacaoParcial
+                if (isNull(operacao)) {
+                    primeiroNumero = numeroAtual.toInt()
+                    operacao = botao.text.toString()
+                    numeroAtual = ""
+                    val operacaoParcial = primeiroNumero.toString() + operacao
+                    visorTv.text = operacaoParcial
+                } else {
+                    primeiroNumero = getResultadoOperacao()
+                    operacao = botao.text.toString()
+                    numeroAtual = ""
+                    val operacaoParcial = primeiroNumero.toString() + operacao
+                    visorTv.text = operacaoParcial
+                }
             }
         }
     }
 
-    private fun ActivityMainBinding.initClearButton() {
-        clearBt.setOnClickListener {
-            visorTv.text = ""
-            numeroAtual = ""
-            primeiroNumero = null
-            operacao = null
-        }
+    private fun ActivityMainBinding.clear() {
+        visorTv.text = ""
+        numeroAtual = ""
+        primeiroNumero = null
+        operacao = null
     }
 }
