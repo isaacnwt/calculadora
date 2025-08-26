@@ -1,6 +1,7 @@
 package br.edu.ifsp.scl.ads.prdm.sc3014789.calculadora
 
 import android.os.Bundle
+import android.text.TextUtils.isEmpty
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.prdm.sc3014789.calculadora.databinding.ActivityMainBinding
@@ -26,13 +27,18 @@ class MainActivity : AppCompatActivity() {
             clearBt.setOnClickListener { clear() }
 
             igualBt.setOnClickListener {
-                val resultado = getResultadoOperacao()
-                if (nonNull(resultado)) {
-                    val resultadoFormatted = getFormattedNumber(resultado)
-                    visorTv.text = resultadoFormatted
-                    numeroAtual = resultadoFormatted
-                    operacao = null
-                } else clear()
+                if (isNull(primeiroNumero) || (nonNull(operacao) && isEmpty(numeroAtual))) {
+                    Toast.makeText(this@MainActivity, "Operação incompleta!", Toast.LENGTH_SHORT).show()
+                } else {
+                    val resultado = getResultadoOperacao()
+                    if (nonNull(resultado)) {
+                        val resultadoFormatted = getFormattedNumber(resultado)
+                        visorTv.text = resultadoFormatted
+                        numeroAtual = resultadoFormatted
+                        primeiroNumero = null
+                        operacao = null
+                    } else clear()
+                }
             }
 
         }
