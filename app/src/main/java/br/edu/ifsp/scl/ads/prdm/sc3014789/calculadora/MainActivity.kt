@@ -25,24 +25,24 @@ class MainActivity : AppCompatActivity() {
             initBotoesNumeros()
             initBotoesOperacoes()
             clearBt.setOnClickListener { clear() }
-
-            igualBt.setOnClickListener {
-                if (isNull(primeiroNumero) || (nonNull(operacao) && isEmpty(numeroAtual))) {
-                    Toast.makeText(this@MainActivity, "Operação incompleta!", Toast.LENGTH_SHORT).show()
-                } else {
-                    val resultado = getResultadoOperacao()
-                    if (nonNull(resultado)) {
-                        val resultadoFormatted = getFormattedNumber(resultado)
-                        visorTv.text = resultadoFormatted
-                        numeroAtual = resultadoFormatted
-                        primeiroNumero = null
-                        operacao = null
-                    } else clear()
-                }
-            }
-
+            igualBt.setOnClickListener { calcularOperacao() }
         }
 
+    }
+
+    private fun ActivityMainBinding.calcularOperacao() {
+        if (isNull(primeiroNumero) || (nonNull(operacao) && isEmpty(numeroAtual))) {
+            Toast.makeText(this@MainActivity, "Operação incompleta!", Toast.LENGTH_SHORT).show()
+        } else {
+            val resultado = getResultadoOperacao()
+            if (nonNull(resultado)) {
+                val resultadoFormatted = getFormattedNumber(resultado)
+                visorTv.text = resultadoFormatted
+                numeroAtual = resultadoFormatted
+                primeiroNumero = null
+                operacao = null
+            } else clear()
+        }
     }
 
     private fun getResultadoOperacao(): Double? {
